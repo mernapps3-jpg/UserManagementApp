@@ -1,4 +1,4 @@
-const { listUsers, updateUserRole } = require('../services/userService');
+const { listUsers, updateUserRole, deleteUser } = require('../services/userService');
 
 async function getAllUsers(req, res, next) {
     try {
@@ -30,17 +30,14 @@ async function changeRole(req, res, next) {
 }
 
 async function removeUser(req, res, next) {
-  try {
-    const { id } = req.params;
-    const actingUserId = req.user._id || req.user.id;
-    await deleteUser(id, actingUserId);
-    res.json({ success: true, deletedId: id });
-  } catch (error) {
-    next(error);
-  }
+    try {
+        const { id } = req.params;
+        const actingUserId = req.user._id || req.user.id;
+        await deleteUser(id, actingUserId);
+        res.json({ success: true, deletedId: id });
+    } catch (error) {
+        next(error);
+    }
 }
-
-
-
 
 module.exports = { getAllUsers, changeRole, removeUser }

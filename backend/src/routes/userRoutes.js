@@ -6,8 +6,8 @@ const validateRequest = require('../middlewares/validateRequest');
 
 const router = express.Router();
 
-router.get('/', authenticate, authorizeRole('user'), getAllUsers);
-router.patch('/:id/role', authenticate, authorizeRole('user'), updateRoleValidator, validateRequest, changeRole);
-router.delete('/:id', authenticate, authorizeRole('user'), userIdParamValidator, validateRequest, removeUser);
+router.get('/', authenticate, authorizeRole('admin'), getAllUsers);
+router.patch('/:id/role', authenticate, authorizeRole('admin'), updateRoleValidator, validateRequest, changeRole);
+router.delete('/:id', authenticate, authorizeRole('admin'), userIdParamValidator, validateRequest, removeUser);
 
 module.exports = router;

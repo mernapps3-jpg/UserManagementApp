@@ -7,20 +7,20 @@ const geminiClient = env.geminiApiKey ? new GoogleGenerativeAI(env.geminiApiKey)
 
 
 async function askAi(prompt) {
-    const cleanPrompt = prompt.trim()
+  const cleanPrompt = prompt.trim()
 
-    if(geminiClient) {
-        const model = geminiClient.getGenerativeModel({ model: "gemini-2.5-flash"});
-        const result = await model.generateContent(cleanPrompt);
-        const text = result.response?.text?.() || "no response";
-        return text.trim();
-    }
+  if (geminiClient) {
+    const model = geminiClient.getGenerativeModel({ model: "gemini-2.5-flash" });
+    const result = await model.generateContent(cleanPrompt);
+    const text = result.response?.text?.() || "no response";
+    return text.trim();
+  }
 
-      if (env.chatGptApiKey) {
-        return askChatGpt(cleanPrompt);
-      }
+  if (env.chatGptApiKey) {
+    return askChatGpt(cleanPrompt);
+  }
 
-      return 'Demo response: add GEMINI_API_KEY or CHATGPT_API_KEY in backend/.env to get live AI answers.';
+  return 'Demo response: add GEMINI_API_KEY or CHATGPT_API_KEY in backend/.env to get live AI answers.';
 }
 
 // Minimal wrapper for ChatGPT API (kept for compatibility and fallback).
