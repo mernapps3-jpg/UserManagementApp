@@ -27,9 +27,28 @@ async function registerUser({ name, email, password }) {
     return { user: sanitizeUser(user), token }
 }
 
-function sanitizeUser(user) {
-  const { _id, name, email, role, createdAt, updatedAt } = user;
-  return { id: String(_id), name, email, role, createdAt, updatedAt };
+async function loginUser({ email, password }) {
+    const user = await User.findOne({ email });
+    if (!user) {
+        const error = new Error('Invalid credentials');
+        error.status = 401;
+        throw error;
+    }
+
+    const passwordMatch = await bcrypt.compare(password, user.password)
+    if (!passwordMatch) {
+        const error = new Error('Invalid credentials');
+        error.status = 401;
+        throw error;
+    }
+
+    const token = generateToken(user._id);
+    return { user: sanitizeUser(user), token }
 }
 
-module.exports = { registerUser, sanitizeUser };
+function sanitizeUser(user) {
+    const { _id, name, email, role, createdAt, updatedAt } = user;
+    return { id: String(_id), name, email, role, createdAt, updatedAt };
+}
+
+module.exports = { registerUser, loginUser, sanitizeUser };

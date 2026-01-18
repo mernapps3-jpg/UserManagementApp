@@ -3,6 +3,8 @@ const cors = require("cors");
 const connectDb = require("./config/db");
 const env = require("./config/env");
 const authRoutes = require("./routes/authRoutes")
+const userRoutes = require('./routes/userRoutes');
+const aiRoutes = require("./routes/aiRoutes")
 
 
 // Express App Instance
@@ -31,6 +33,13 @@ app.get("/api/health", (req, res) => {
 
 // Setting up or Mounting the Routes
 app.use("/api/auth", authRoutes);
+app.use('/api/users', userRoutes);
+app.use("/api/ai", aiRoutes);
+
+// Fallback for unmatched routes to give clear response.
+app.use((req, res) => {
+  res.status(404).json({ success: false, message: 'Route not found' });
+});
 
 // All error will be handled by this error handler Function
 // app.use(errorHandler);
