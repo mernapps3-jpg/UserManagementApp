@@ -4,8 +4,8 @@ const connectDb = require("./config/db");
 const env = require("./config/env");
 const authRoutes = require("./routes/authRoutes")
 const userRoutes = require('./routes/userRoutes');
-const aiRoutes = require("./routes/aiRoutes")
-
+const aiRoutes = require("./routes/aiRoutes");
+const errorHandler = require('./middlewares/errorHandler');
 
 // Express App Instance
 const app = express();

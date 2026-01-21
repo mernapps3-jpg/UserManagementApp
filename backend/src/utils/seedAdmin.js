@@ -19,7 +19,7 @@ async function seedAdmin() {
       return;
     }
 
-    const hashedPassword = await bcrypt.hash(adminPassword, 10);
+    const hashedPassword = await bcrypt.hash(adminPassword, 10); //fsdsdfgsd = @3q43345345435
     const admin = await User.create({
       name: adminName,
       email: adminEmail,
