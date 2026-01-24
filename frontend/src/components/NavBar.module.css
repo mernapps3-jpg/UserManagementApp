@@ -1,0 +1,108 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.75rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-radius: var(--radius);
+  margin: 1.5rem 1.5rem 2rem;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.navbar:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.navbarLink {
+  color: var(--text);
+  margin-right: 1.25rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.navbarLink:hover {
+  color: var(--accent-2);
+  background: rgba(6, 182, 212, 0.1);
+  transform: translateY(-1px);
+}
+
+.navbarBrand {
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  padding: 0;
+  margin-right: 2rem;
+  text-decoration: none;
+}
+
+.navbarLinks {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.navbarWelcome {
+  font-size: 0.9rem;
+  color: var(--muted);
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-sm);
+  margin-right: 0.75rem;
+}
+
+.navbarLogoutButton {
+  padding: 0.6rem 1.25rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  text-transform: none;
+}
+
+.navbarLogoutButton:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+.navbarLogoutButton:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 900px) {
+  .navbar {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .navbarBrand {
+    margin-right: 0;
+  }
+
+  .navbarLinks {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+  }
+}

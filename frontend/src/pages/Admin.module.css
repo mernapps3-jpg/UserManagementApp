@@ -1,0 +1,718 @@
+.adminGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  animation: fadeIn 0.8s ease-out;
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.userList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.userListItem {
+  display: grid;
+  grid-template-columns: minmax(120px, 1.5fr) minmax(150px, 1.8fr) minmax(80px, 0.8fr) minmax(200px, auto);
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1rem;
+  border-bottom: 1px solid var(--card-border);
+  color: #fff;
+  transition: all 0.2s ease;
+  border-radius: var(--radius-sm);
+  min-width: 0;
+}
+
+.userListItem:hover {
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateX(4px);
+}
+
+.userListItem:last-child {
+  border-bottom: none;
+}
+
+.userName {
+  font-weight: 600;
+  color: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.userEmail {
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+  font-size: 0.9rem;
+}
+
+.roleTag {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(6, 182, 212, 0.2));
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 700;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  color: var(--accent-2);
+  white-space: nowrap;
+  display: inline-block;
+  text-align: center;
+  min-width: fit-content;
+  flex-shrink: 0;
+}
+
+.roleTagAdmin {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(139, 92, 246, 0.15));
+  border-color: rgba(139, 92, 246, 0.4);
+  color: #c4b5fd;
+}
+
+.roleTagUser {
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(6, 182, 212, 0.1));
+  border-color: rgba(6, 182, 212, 0.3);
+  color: #67e8f9;
+}
+
+.userActions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+
+.userActions button {
+  flex-shrink: 0;
+  white-space: nowrap;
+  min-width: fit-content;
+  font-size: 0.85rem;
+  padding: 0.65rem 1.1rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.roleButton {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(6, 182, 212, 0.2));
+  color: var(--accent-2);
+  border: 1.5px solid rgba(139, 92, 246, 0.4);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+}
+
+.roleButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(6, 182, 212, 0.3));
+  border-color: rgba(139, 92, 246, 0.6);
+  box-shadow: 0 6px 16px rgba(139, 92, 246, 0.3);
+  transform: translateY(-1px);
+}
+
+.roleButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.deleteButton {
+  background: linear-gradient(135deg, var(--danger), #f97316);
+  color: #fff;
+  border: 1.5px solid rgba(239, 68, 68, 0.5);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+}
+
+.deleteButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, #dc2626, #ea580c);
+  border-color: rgba(239, 68, 68, 0.7);
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.35);
+  transform: translateY(-1px);
+}
+
+.deleteButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.buttonLoading {
+  display: inline-block;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.buttonLocked {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  position: relative;
+  filter: grayscale(0.4);
+  pointer-events: none;
+}
+
+.userActions button.buttonLocked:hover {
+  transform: none !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+.userActions button.roleButton.buttonLocked {
+  background: rgba(139, 92, 246, 0.1) !important;
+  border-color: rgba(139, 92, 246, 0.2) !important;
+  color: rgba(6, 182, 212, 0.5) !important;
+}
+
+.userActions button.deleteButton.buttonLocked {
+  background: rgba(239, 68, 68, 0.2) !important;
+  border-color: rgba(239, 68, 68, 0.3) !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.aiHeader {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(139, 92, 246, 0.2);
+}
+
+.aiIcon {
+  display: inline-block;
+  margin-right: 0.5rem;
+  font-size: 1.5rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.aiSubtitle {
+  margin: 0.5rem 0 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.labelIcon {
+  margin-right: 0.5rem;
+  font-size: 1rem;
+}
+
+.aiFormActions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.askButton {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(6, 182, 212, 0.3));
+  border: 1.5px solid rgba(139, 92, 246, 0.5);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
+  transition: all 0.3s ease;
+}
+
+.askButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.4), rgba(6, 182, 212, 0.4));
+  border-color: rgba(139, 92, 246, 0.7);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.35);
+  transform: translateY(-2px);
+}
+
+.askButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.buttonIcon {
+  font-size: 1.1rem;
+}
+
+.clearButton {
+  padding: 0.65rem 1rem;
+  background: rgba(107, 114, 128, 0.2);
+  border: 1px solid rgba(107, 114, 128, 0.4);
+  color: var(--muted);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.clearButton:hover {
+  background: rgba(107, 114, 128, 0.3);
+  border-color: rgba(107, 114, 128, 0.6);
+  transform: translateY(-1px);
+}
+
+.aiAnswer {
+  margin-top: 1.5rem;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(59, 130, 246, 0.1));
+  padding: 0;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(6, 182, 212, 0.4);
+  color: #e0f2fe;
+  animation: slideIn 0.4s ease-out;
+  box-shadow: 0 4px 20px rgba(6, 182, 212, 0.2);
+  overflow: hidden;
+}
+
+.aiAnswerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  background: rgba(6, 182, 212, 0.1);
+  border-bottom: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+.aiAnswerLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--accent-2);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.responseIcon {
+  font-size: 1.2rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.closeButton {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: var(--danger);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.closeButton:hover {
+  background: rgba(239, 68, 68, 0.3);
+  transform: scale(1.1);
+}
+
+.aiAnswerContent {
+  padding: 1.25rem;
+}
+
+.aiAnswerText {
+  margin: 0;
+  line-height: 1.8;
+  color: #f0f9ff;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.aiError {
+  margin-top: 1rem;
+  position: relative;
+  padding: 1rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius-sm);
+  animation: slideIn 0.3s ease-out;
+}
+
+.errorCloseButton {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  padding: 0;
+  border: none;
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: var(--danger);
+}
+
+.errorCloseButton:hover {
+  background: rgba(239, 68, 68, 0.3);
+  transform: scale(1.1);
+}
+
+.chatHistory {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid rgba(139, 92, 246, 0.2);
+  animation: slideIn 0.5s ease-out;
+}
+
+.chatHistoryHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.chatHistoryTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  color: var(--accent-2);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.historyIcon {
+  font-size: 1.3rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+.clearHistoryButton {
+  padding: 0.5rem 1rem;
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: var(--danger);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.clearHistoryButton:hover {
+  background: rgba(239, 68, 68, 0.3);
+  border-color: rgba(239, 68, 68, 0.6);
+  transform: translateY(-1px);
+}
+
+.chatHistoryList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.accordionItem {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(6, 182, 212, 0.06));
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  animation: slideIn 0.4s ease-out;
+}
+
+.accordionItem:hover {
+  border-color: rgba(139, 92, 246, 0.4);
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.15);
+}
+
+.accordionHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+  gap: 1rem;
+}
+
+.accordionHeader:hover {
+  background: rgba(139, 92, 246, 0.1);
+}
+
+.accordionHeaderContent {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.accordionIcon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.accordionQuestion {
+  color: #e0e7ff;
+  font-weight: 500;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  word-wrap: break-word;
+  flex: 1;
+  min-width: 0;
+}
+
+.accordionHeaderMeta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.accordionTimestamp {
+  color: var(--muted);
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.accordionArrow {
+  font-size: 0.7rem;
+  color: var(--accent-2);
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.accordionArrowOpen {
+  transform: rotate(180deg);
+}
+
+.accordionContent {
+  padding: 0 1.25rem 1.25rem 1.25rem;
+  animation: slideDown 0.3s ease-out;
+  border-top: 1px solid rgba(139, 92, 246, 0.2);
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    max-height: 1000px;
+    transform: translateY(0);
+  }
+}
+
+.accordionAnswer {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.accordionAnswerIcon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.accordionAnswerText {
+  margin: 0;
+  color: #f0f9ff;
+  line-height: 1.7;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  flex: 1;
+}
+
+@media (max-width: 600px) {
+  .chatHistoryHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .clearHistoryButton {
+    width: 100%;
+    text-align: center;
+  }
+
+  .accordionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .accordionHeaderMeta {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .accordionQuestion {
+    font-size: 0.9rem;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.errorContainer,
+.successContainer {
+  position: relative;
+  margin-top: 1rem;
+  animation: slideIn 0.3s ease-out;
+}
+
+.successMessage {
+  color: var(--success);
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: var(--radius-sm);
+  margin: 0;
+}
+
+.successDismiss,
+.errorDismiss {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  padding: 0;
+  border: none;
+}
+
+.errorDismiss {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: var(--danger);
+}
+
+.errorDismiss:hover {
+  background: rgba(239, 68, 68, 0.3);
+  transform: scale(1.1);
+}
+
+.successDismiss {
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: var(--success);
+}
+
+.successDismiss:hover {
+  background: rgba(16, 185, 129, 0.3);
+  transform: scale(1.1);
+}
+
+@media (max-width: 1200px) {
+  .userListItem {
+    grid-template-columns: minmax(100px, 1.2fr) minmax(120px, 1.5fr) minmax(70px, 0.7fr) minmax(180px, auto);
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .adminGrid {
+    gap: 1.5rem;
+    max-width: 100%;
+  }
+
+  .userListItem {
+    grid-template-columns: 1fr;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .userName {
+    width: 100%;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .userEmail {
+    width: 100%;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .userActions {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .userActions button {
+    flex: 1;
+    min-width: 120px;
+  }
+}
