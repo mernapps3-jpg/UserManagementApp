@@ -1,7 +1,8 @@
 # User Management & Role-Based Access System
 Beginner-friendly MERN app with JWT auth, role-based authorization (Admin/User), protected REST APIs, and a modern React UI. Features automatic admin seeding, AI assistant (Gemini/ChatGPT), and chat history management.
 
-## Backend Deployment Link - (https://user-management-app-backend-63sv.onrender.com/)
+## Backend Deployment Link - (https://user-management-app-backend-63sv.onrender.com)
+## Frontend Deployment Link - (https://user-management-app-frontend-kappa.vercel.app)
 
 ## 📚 Learning Resources
 
